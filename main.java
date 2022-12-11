@@ -3,6 +3,7 @@
  */
 public class main {
     public static void main(String[] args) {
-        //sdf
+        szachwonica plansza = new szachwonica();
+        plansza.Rysuj();
     }
 }
