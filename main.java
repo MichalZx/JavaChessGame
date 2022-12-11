@@ -6,4 +6,3 @@ public class main {
         szachwonica plansza = new szachwonica();
         plansza.Rysuj();
     }
-}
