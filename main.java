@@ -1,8 +1,8 @@
-/**
- * main
- */
-public class main {
+public class Main {
     public static void main(String[] args) {
-        szachwonica plansza = new szachwonica();
+        Szachownica plansza = new Szachownica();
         plansza.Rysuj();
+        Player gracz=new Player();
+        gracz.Ruch();//w sumie nie wiem czemu tu jest blad jak i tak dziala normalnie XD
     }
+}

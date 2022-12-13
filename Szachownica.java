@@ -1,5 +1,5 @@
-public class szachwonica {
-    String[][] plansza={{Color.YELLOW_BOLD+" W ",Color.YELLOW_BOLD+" S ",Color.YELLOW_BOLD+" G ",Color.YELLOW_BOLD+" H ",Color.YELLOW_BOLD+" K ",Color.YELLOW_BOLD+" G ",Color.YELLOW_BOLD+" S ",Color.YELLOW_BOLD+" W "},
+public class Szachownica {
+    public String[][] plansza={{Color.YELLOW_BOLD+" W ",Color.YELLOW_BOLD+" S ",Color.YELLOW_BOLD+" G ",Color.YELLOW_BOLD+" H ",Color.YELLOW_BOLD+" K ",Color.YELLOW_BOLD+" G ",Color.YELLOW_BOLD+" S ",Color.YELLOW_BOLD+" W "},
     {Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I ",Color.YELLOW_BOLD+" I "},
     {"   ","   ","   ","   ","   ","   ","   ","   "},
     {"   ","   ","   ","   ","   ","   ","   ","   "},
@@ -16,10 +16,10 @@ public class szachwonica {
                 if(licznikV2 %2== 0){
                     System.out.print(ConsoleColors.WHITE_BACKGROUND_BRIGHT+string+ConsoleColors.RESET);
                 }
-                else System.out.print(string);
+                else System.out.print(ConsoleColors.BLACK_BACKGROUND+string+ConsoleColors.RESET);
                 licznikV2++;
             }
-            System.out.println(ConsoleColors.GREEN_BACKGROUND+" "+licznik+" "+ConsoleColors.RESET+"");
+            System.out.println(ConsoleColors.GREEN_BACKGROUND+" "+licznik+" "+ConsoleColors.RESET);
             licznik--;
             licznikV2--;
         }
