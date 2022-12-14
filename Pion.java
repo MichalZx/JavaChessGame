@@ -41,13 +41,13 @@ public class Pion extends Figura {
                     listaDozwolonyuchRuchow.add(dozwolonyPierwszyRuch);
                 }
             }
-            if(pozycjaFiguryWybranej[1] != 7 && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] + 1] != null && Szachownica.plansza[pozycjaFiguryWybranej[0] - 1][pozycjaFiguryWybranej[1] + 1].getKolor() != Color.YELLOW_BOLD){
+            if(pozycjaFiguryWybranej[1] != 7 && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] + 1] != null && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] + 1].getKolor() != Color.YELLOW_BOLD){
                 int[] dozwolonyRuch = new int[2];
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0] + 1;
                 dozwolonyRuch[1] = pozycjaFiguryWybranej[1] + 1;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
             }
-            if(pozycjaFiguryWybranej[1] != 0 && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] - 1] != null && Szachownica.plansza[pozycjaFiguryWybranej[0] - 1][pozycjaFiguryWybranej[1] - 1].getKolor() != Color.YELLOW_BOLD){
+            if(pozycjaFiguryWybranej[1] != 0 && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] - 1] != null && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] - 1].getKolor() != Color.YELLOW_BOLD){
                 int[] dozwolonyRuch = new int[2];
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0] + 1;
                 dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
