@@ -8,7 +8,11 @@ public class Player {
         String pozycjaOut = sc.nextLine();
         char[] charPoleWybranej = pozycjaOut.toLowerCase().toCharArray();
         int[] pozycjaFiguryWybranej = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};   
-        if(CzyNalerzyDoSzachownicy(charPoleWybranej)){   
+        if(CzyNalerzyDoSzachownicy(charPoleWybranej)){  
+            if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]==null) {
+                System.out.println(Color.RED+"Wybrano puste pole"+Color.RESET);
+                Ruch(kolorGracza, kolorPrzeciwnika);
+            }
             if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].getKolor()==kolorGracza){    //tu sprawdza czy rusza sie wlasciwy gracz
                 int[][] mozliweRuchy = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].sprawdzMozliweRuchy(pozycjaFiguryWybranej);
                 if(mozliweRuchy.length==0){System.out.println("Brak możliwych ruchów"); Ruch(kolorGracza,kolorPrzeciwnika);} //jezeli nie ma mozliwych ruchow to od nowa
@@ -21,6 +25,7 @@ public class Player {
         }
         else{
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
+            Ruch(kolorGracza, kolorPrzeciwnika);
         }    
     }
     public void Ruch2(int[] pozycjaFiguryWybranej, int[][]mozliweRuchy,Color kolorGracza,Color kolorPrzeciwnika){
@@ -30,8 +35,9 @@ public class Player {
         char[]charPoleWybranej = pozycjaIn.toLowerCase().toCharArray();
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
         if(CzyNalerzyDoSzachownicy(charPoleWybranej) & CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){ 
+            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97));     // zapis pozunieniac do pliku
             Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy);
-            Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek
+            Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
         }
         else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
@@ -59,6 +65,12 @@ public class Player {
             if(is[0]==pozycjaRuchu[0]&is[1]==pozycjaRuchu[1]){ 
                 return true;
             }
+        }
+        return false;
+    }
+    private boolean CzyNastapiloBicie(int[] pozycjaRuchu, Color kolorprzeciwnika){
+        if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]!=null){ // to nie puste pole
+            if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].getKolor()==kolorprzeciwnika){return true;} // nastapilo bicie przeciwnika
         }
         return false;
     }
