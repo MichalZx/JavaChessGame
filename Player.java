@@ -34,19 +34,25 @@ public class Player {
         String pozycjaIn = sc.nextLine();
         char[]charPoleWybranej = pozycjaIn.toLowerCase().toCharArray();
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
-        if(CzyNalerzyDoSzachownicy(charPoleWybranej) & CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){ 
-            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97));     // zapis pozunieniac do pliku
-            Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy);
-            Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
-        }
-        else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){
-            System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
-            Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
-        }
-        else if(CzyNalerzyDoSzachownicy(charPoleWybranej) & Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].getKolor()==kolorGracza){
-            int[][] mozliweRuchy2 = Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].sprawdzMozliweRuchy(pozycjaRuchu);
-            if(mozliweRuchy2.length>0){Ruch2(pozycjaRuchu, mozliweRuchy2, kolorGracza, kolorPrzeciwnika);}      //zmiana grajacej figury
-            else{System.out.println("Brak możliwych ruchów");Ruch2(pozycjaFiguryWybranej, mozliweRuchy, kolorGracza, kolorPrzeciwnika);}    //gra ta sama figura dalej
+        if(CzyNalerzyDoSzachownicy(charPoleWybranej)){
+            if( CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){ 
+                ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97));     // zapis pozunieniac do pliku
+                Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy);
+                Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
+            }
+            else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){
+                System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
+                Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
+            }
+            else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].getKolor()==kolorGracza){
+                int[][] mozliweRuchy2 = Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].sprawdzMozliweRuchy(pozycjaRuchu);
+                if(mozliweRuchy2.length>0){Ruch2(pozycjaRuchu, mozliweRuchy2, kolorGracza, kolorPrzeciwnika);}      //zmiana grajacej figury
+                else{System.out.println("Brak możliwych ruchów");Ruch2(pozycjaFiguryWybranej, mozliweRuchy, kolorGracza, kolorPrzeciwnika);}    //gra ta sama figura dalej
+            }
+            else{
+                System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
+                Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
+            }
         }
         else{
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
