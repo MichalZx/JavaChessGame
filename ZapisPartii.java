@@ -21,19 +21,23 @@ public class ZapisPartii {      // szyblie tworzenie na poczatku kazdej gry
             e.printStackTrace();
         }
     }
-    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona){
+    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona, String promocja){
         String symbolFigury=figura.split(" ")[1];
         String ruch;
         //System.out.println(figura==" I ");
         if(byloBicie==true){
-            if(figura==" I ")               // txt do zapisania w pliku
+            if(figura==" I " && promocja.equals("0"))               // txt do zapisania w pliku
                 {ruch=kolumnaPiona+":"+nowaPozycja+"\n"; } 
+            else if(figura==" I " && (promocja.equals("0")==false))               // txt do zapisania w pliku
+                {ruch=kolumnaPiona+":"+nowaPozycja+"\n"+nowaPozycja+promocja+"\n"; } 
             else{ruch=symbolFigury+":"+nowaPozycja+"\n"; }
         }
         else{
-        if(figura==" I ")               // txt do zapisania w pliku
-        {ruch=nowaPozycja+"\n"; } 
-        else{ruch=symbolFigury+nowaPozycja+"\n"; }
+            if(figura==" I "&&promocja.equals("0"))               // txt do zapisania w pliku
+            {ruch=nowaPozycja+"\n"; } 
+            else if(figura==" I " && (promocja.equals("0")==false))               // txt do zapisania w pliku
+            {ruch=nowaPozycja+promocja+"\n"; } 
+            else{ruch=symbolFigury+nowaPozycja+"\n"; }
         }  
         try (Writer out = new BufferedWriter(new FileWriter(pathFile, true));) {
             out.append(ruch);           // tu dopisuje

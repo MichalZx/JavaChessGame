@@ -29,6 +29,7 @@ public class Player {
         }    
     }
     public void Ruch2(int[] pozycjaFiguryWybranej, int[][]mozliweRuchy,Color kolorGracza,Color kolorPrzeciwnika){
+        String promocja="0";
         Szachownica.Rysuj(pozycjaFiguryWybranej, mozliweRuchy);
         System.out.print("Podaj pozycje ruchu z możliwych opcji w formacie [a2]: ");
         String pozycjaIn = sc.nextLine();
@@ -36,8 +37,11 @@ public class Player {
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
         if(CzyNalerzyDoSzachownicy(charPoleWybranej)){
             if( CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){ 
-                ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97));     // zapis pozunieniac do pliku
                 Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy);
+                if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury==" I "){
+                   promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu);
+                }
+                ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97),promocja);     // zapis pozunieniac do pliku
                 Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
             }
             else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){

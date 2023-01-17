@@ -13,10 +13,10 @@ public class Szachownica {
     public static Figura[][] plansza =
     {{ new Wieza(Color.YELLOW_BOLD), null, null, null, new Krol(Color.YELLOW_BOLD), null, null, new Wieza(Color.YELLOW_BOLD) },
         { null, new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Hetman(Color.YELLOW_BOLD), null, new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), null },
+        { null, null, null, null, null, null, new Pion(Color.BLUE_BOLD), null },
         { null, null, null, null, null, null, null, null },
         { null, null, null, null, null, null, null, null },
-        { null, null, null, null, null, null, null, null },
-        { null, null, null, null, null, null, null, null },
+        { null, null, null, null, null, null, new Pion(Color.YELLOW_BOLD), null },
         { null, new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Hetman(Color.BLUE_BOLD), null, new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), null },
         { new Wieza(Color.BLUE_BOLD), null, null, null, new Krol(Color.BLUE_BOLD), null, null, new Wieza(Color.BLUE_BOLD) }};
 */

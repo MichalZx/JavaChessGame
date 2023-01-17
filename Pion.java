@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+
+import javax.print.event.PrintEvent;
 
 public class Pion extends Figura {
+    Scanner sc = new Scanner(System.in);
     public Pion(Color kolor) {
         super(kolor);
         znakFigury = " I ";
@@ -23,6 +28,34 @@ public class Pion extends Figura {
                 break;
             }
         }
+    }
+
+    @Override
+    public String CheckEnd(int[] pozycjaFigury){// zolty 7, niebieski 0
+        Color kolor =Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]].getKolor();
+        if(pozycjaFigury[0]==0 && kolor==Color.BLUE_BOLD)
+            return Promocja(pozycjaFigury,kolor);
+        else if (pozycjaFigury[0]==7 && kolor==Color.YELLOW_BOLD)
+            return Promocja(pozycjaFigury,kolor);
+        return "0";
+    }
+    public String Promocja(int[] pozycjaFigury, Color kolor){
+        System.out.println("Wybierz figure: W / S / G / H ");
+        String figura = sc.nextLine();
+        if(figura.toLowerCase().equals("w")){
+            Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]]=new Wieza(kolor);
+        } else if(figura.toLowerCase().equals("s")){
+            Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]]=new Skoczek(kolor);
+        } else if(figura.toLowerCase().equals("g")){
+            Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]]=new Goniec(kolor);
+        } else if(figura.toLowerCase().equals("h")){
+            Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]]=new Hetman(kolor);
+        }
+        else{
+            System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
+            Promocja(pozycjaFigury, kolor);
+        }
+        return figura.toUpperCase();
     }
 
     @Override
