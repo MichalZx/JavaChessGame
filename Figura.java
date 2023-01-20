@@ -34,6 +34,6 @@ public abstract class Figura {
             }
         }
     }
-
+    public abstract String CheckEnd(int[] pozycjaFigury);
     public abstract int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[][] ostatniRuch, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika); //zwraca tablicę możłiwych ruchów
 }

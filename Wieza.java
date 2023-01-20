@@ -7,7 +7,7 @@ public class Wieza extends Figura {
     }
 
     private boolean czyWykonanoRuch;
-
+    
     public void Roszada(){
 
     }
