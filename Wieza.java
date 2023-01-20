@@ -13,9 +13,9 @@ public class Wieza extends Figura {
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej) {
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[][] ostatniRuch, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
-        for(int i = pozycjaFiguryWybranej[0] - 1; i >= 0; i--){
+        for(int i = pozycjaFiguryWybranej[0] - 1; i >= 0; i--){ //tylko gora
             int [] dozwolonyRuch = new int[2];
             if(Szachownica.plansza[i][pozycjaFiguryWybranej[1]] == null){
                 dozwolonyRuch[0] = i;
@@ -30,7 +30,7 @@ public class Wieza extends Figura {
             }
             else break;
         }
-        for(int i = pozycjaFiguryWybranej[0] + 1; i < 8; i++){
+        for(int i = pozycjaFiguryWybranej[0] + 1; i < 8; i++){  // dol
             int [] dozwolonyRuch = new int[2];
             if(Szachownica.plansza[i][pozycjaFiguryWybranej[1]] == null){
                 dozwolonyRuch[0] = i;
@@ -45,7 +45,7 @@ public class Wieza extends Figura {
             }
             else break;
         }
-        for(int i = pozycjaFiguryWybranej[1] - 1; i >= 0; i--){
+        for(int i = pozycjaFiguryWybranej[1] - 1; i >= 0; i--){ //lewo
             int[] dozwolonyRuch = new int[2];
             if(Szachownica.plansza[pozycjaFiguryWybranej[0]][i] == null){
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0];
@@ -60,7 +60,7 @@ public class Wieza extends Figura {
             }
             else break;
         }
-        for(int i = pozycjaFiguryWybranej[1] + 1; i < 8; i++){
+        for(int i = pozycjaFiguryWybranej[1] + 1; i < 8; i++){  //prawo
             int[] dozwolonyRuch = new int[2];
             if(Szachownica.plansza[pozycjaFiguryWybranej[0]][i] == null){
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0];

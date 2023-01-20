@@ -8,7 +8,7 @@ public class Skoczek extends Figura {
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej) {
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[][] ostatniRuch, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
         if ( pozycjaFiguryWybranej[0] + 2 <= 7 ){
             if ( pozycjaFiguryWybranej[1] + 1 <= 7 ){
