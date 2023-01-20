@@ -53,7 +53,7 @@ public class Player {
         char[]charPoleWybranej = pozycjaIn.toLowerCase().toCharArray();
         if(charPoleWybranej.length!=2){
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
-            Ruch(kolorGracza, kolorPrzeciwnika);}
+            Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
         String promocja="0";
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
         if(CzyNalezyDoSzachownicy(charPoleWybranej) & CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){
