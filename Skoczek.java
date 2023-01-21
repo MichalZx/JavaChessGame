@@ -8,7 +8,7 @@ public class Skoczek extends Figura {
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej) {
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
         if ( pozycjaFiguryWybranej[0] + 2 <= 7 ){
             if ( pozycjaFiguryWybranej[1] + 1 <= 7 ){
@@ -125,5 +125,10 @@ public class Skoczek extends Figura {
         int[][] zwracanaTablicaRuchow = new int[listaDozwolonyuchRuchow.size()][2];
         zwracanaTablicaRuchow = listaDozwolonyuchRuchow.toArray(zwracanaTablicaRuchow);
         return zwracanaTablicaRuchow;
+    }
+
+    @Override
+    public String CheckEnd(int[] pozycjaFigury) {
+        return null;
     }
 }

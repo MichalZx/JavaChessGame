@@ -10,6 +10,11 @@ public abstract class Figura {
     protected String znakFigury;
     public String getZnakFigury() { return znakFigury; }
 
+    public int[][] czySzach(int[] pozycjaKrola, Color kolorSprawdzany){
+        int[][] zwrotna = new int[0][];
+        return zwrotna;
+    }
+
 //    private String pozycja; // nie wiem czy się przyda, później może tak, zapisywać np."A8" potem litera z chr na int -65 żeby wyszło jaki indeks na planszy
 //
 //    public String getPozycja() {
@@ -29,7 +34,6 @@ public abstract class Figura {
             }
         }
     }
-
-    public abstract int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej); //zwraca tablicę możłiwych ruchów
     public abstract String CheckEnd(int[] pozycjaFigury);
+    public abstract int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika); //zwraca tablicę możłiwych ruchów
 }

@@ -7,13 +7,13 @@ public class Wieza extends Figura {
     }
 
     private boolean czyWykonanoRuch;
-
+    
     public void Roszada(){
 
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej) {
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej,int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
         for(int i = pozycjaFiguryWybranej[0] - 1; i >= 0; i--){ //tylko gora
             int [] dozwolonyRuch = new int[2];
@@ -78,5 +78,10 @@ public class Wieza extends Figura {
         int[][] zwracanaTablicaRuchow = new int[listaDozwolonyuchRuchow.size()][2];
         zwracanaTablicaRuchow = listaDozwolonyuchRuchow.toArray(zwracanaTablicaRuchow);
         return zwracanaTablicaRuchow;
+    }
+
+    @Override
+    public String CheckEnd(int[] pozycjaFigury) {
+        return null;
     }
 }

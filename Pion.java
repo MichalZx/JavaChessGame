@@ -2,21 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-import javax.print.event.PrintEvent;
-
 public class Pion extends Figura {
-    Scanner sc = new Scanner(System.in);
     public Pion(Color kolor) {
         super(kolor);
         znakFigury = " I ";
     }
-
+    Scanner sc = new Scanner(System.in);
     private boolean czyWykonanoRuch = false;
-
-    public void bicieWPrzelocie(){
-
-    }
 
     @Override
     public void Ruch(int[] pozycjaRuchu, int[] pozycjaFiguryWybranej, int[][] dozwoloneRuchy) {
@@ -24,6 +16,10 @@ public class Pion extends Figura {
             if ( pozycjaDozwolona[0] == pozycjaRuchu[0] && pozycjaDozwolona[1] == pozycjaRuchu[1] ) {
                 Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
                 Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
+                if(pozycjaFiguryWybranej[1] != pozycjaRuchu[1]){
+                    if(getKolor() == Color.YELLOW_BOLD) { Szachownica.plansza[pozycjaRuchu[0] - 1][pozycjaRuchu[1]] = null; }
+                    else if(getKolor() == Color.BLUE_BOLD) { Szachownica.plansza[pozycjaRuchu[0] + 1][pozycjaRuchu[1]] = null; }
+                }
                 czyWykonanoRuch = true;
                 break;
             }
@@ -52,15 +48,16 @@ public class Pion extends Figura {
             Szachownica.plansza[pozycjaFigury[0]][pozycjaFigury[1]]=new Hetman(kolor);
         }
         else{
-            System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
+            System.out.println(Color.RED+"Nieprawid�owa warto��!"+Color.RESET);
             Promocja(pozycjaFigury, kolor);
         }
         return figura.toUpperCase();
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej) {
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
+        int[][] ostatniRuch=Szachownica.ostatniRuch;
         if ( getKolor() == Color.YELLOW_BOLD && pozycjaFiguryWybranej[0] != 7){
             if ( Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1]] == null ) {
                 int[] dozwolonyRuch = new int[2];
@@ -85,6 +82,22 @@ public class Pion extends Figura {
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0] + 1;
                 dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
+            }
+            if(pozycjaFiguryWybranej[0] == 4 && pozycjaFiguryWybranej[1] != 7 && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] + 1] instanceof Pion && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] + 1].getKolor() == Color.BLUE_BOLD && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] + 1] == null){
+                if(ostatniRuch[0][0] - 2 == ostatniRuch[1][0] && ostatniRuch[1][1] == pozycjaFiguryWybranej[1] + 1 && ostatniRuch[1][0] == pozycjaFiguryWybranej[0]){
+                    int[] dozwolonyRuch = new int[2];
+                    dozwolonyRuch[0] = pozycjaFiguryWybranej[0] + 1;
+                    dozwolonyRuch[1] = pozycjaFiguryWybranej[1] + 1;
+                    listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                }
+            }
+            if(pozycjaFiguryWybranej[0] == 4 && pozycjaFiguryWybranej[1] != 0 && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1] instanceof Pion && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1].getKolor() == Color.BLUE_BOLD && Szachownica.plansza[pozycjaFiguryWybranej[0] + 1][pozycjaFiguryWybranej[1] - 1] == null){
+                if(ostatniRuch[0][0] - 2 == ostatniRuch[1][0] && ostatniRuch[1][1] == pozycjaFiguryWybranej[1] - 1 && ostatniRuch[1][0] == pozycjaFiguryWybranej[0]){
+                    int[] dozwolonyRuch = new int[2];
+                    dozwolonyRuch[0] = pozycjaFiguryWybranej[0] + 1;
+                    dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
+                    listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                }
             }
         }
         else if (getKolor() == Color.BLUE_BOLD && pozycjaFiguryWybranej[0] != 0) {
@@ -111,6 +124,23 @@ public class Pion extends Figura {
                 dozwolonyRuch[0] = pozycjaFiguryWybranej[0] - 1;
                 dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
+            }
+            //en passant
+            if(pozycjaFiguryWybranej[0] == 3 && pozycjaFiguryWybranej[1] != 7 && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] + 1] instanceof Pion && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] + 1].getKolor() == Color.YELLOW_BOLD && Szachownica.plansza[pozycjaFiguryWybranej[0] - 1][pozycjaFiguryWybranej[1] + 1] == null){
+                if(ostatniRuch[0][0] + 2 == ostatniRuch[1][0] && ostatniRuch[1][1] == pozycjaFiguryWybranej[1] + 1 && ostatniRuch[1][0] == pozycjaFiguryWybranej[0]){
+                    int[] dozwolonyRuch = new int[2];
+                    dozwolonyRuch[0] = pozycjaFiguryWybranej[0] - 1;
+                    dozwolonyRuch[1] = pozycjaFiguryWybranej[1] + 1;
+                    listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                }
+            }
+            if(pozycjaFiguryWybranej[0] == 3 && pozycjaFiguryWybranej[1] != 0 && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1] instanceof Pion && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1].getKolor() == Color.YELLOW_BOLD && Szachownica.plansza[pozycjaFiguryWybranej[0] - 1][pozycjaFiguryWybranej[1] - 1] == null){
+                if(ostatniRuch[0][0] + 2 == ostatniRuch[1][0] && ostatniRuch[1][1] == pozycjaFiguryWybranej[1] - 1 && ostatniRuch[1][0] == pozycjaFiguryWybranej[0]){
+                    int[] dozwolonyRuch = new int[2];
+                    dozwolonyRuch[0] = pozycjaFiguryWybranej[0] - 1;
+                    dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
+                    listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                }
             }
         }
         int[][] zwracanaTablicaRuchow = new int[listaDozwolonyuchRuchow.size()][2];

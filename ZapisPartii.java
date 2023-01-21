@@ -47,4 +47,13 @@ public class ZapisPartii {      // szyblie tworzenie na poczatku kazdej gry
             e.printStackTrace();        
         }
     }
+    public static void RezultatPartii(String wynik){ //1-0 blue win / 0-1 yellow win / 0.5-0.5 - PAT
+        try (Writer out = new BufferedWriter(new FileWriter(pathFile, true));) {
+            out.append(wynik);           // tu dopisuje
+            out.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();        
+        }
+    }
 }

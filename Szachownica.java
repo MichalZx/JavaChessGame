@@ -1,4 +1,7 @@
+import java.util.List;
+import java.util.ArrayList;
 public class Szachownica {
+
     public static Figura[][] plansza =
             {{ new Wieza(Color.YELLOW_BOLD), new Skoczek(Color.YELLOW_BOLD), new Goniec(Color.YELLOW_BOLD), new Hetman(Color.YELLOW_BOLD), new Krol(Color.YELLOW_BOLD), new Goniec(Color.YELLOW_BOLD), new Skoczek(Color.YELLOW_BOLD), new Wieza(Color.YELLOW_BOLD) },
             { new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD) },
@@ -8,15 +11,16 @@ public class Szachownica {
             { null, null, null, null, null, null, null, null },
             { new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD) },
             { new Wieza(Color.BLUE_BOLD), new Skoczek(Color.BLUE_BOLD), new Goniec(Color.BLUE_BOLD), new Hetman(Color.BLUE_BOLD), new Krol(Color.BLUE_BOLD), new Goniec(Color.BLUE_BOLD), new Skoczek(Color.BLUE_BOLD), new Wieza(Color.BLUE_BOLD) }};
+
 // Plansza do roszady krotkiej i dlugiej, en passanta, szacha :
-/* 
+/*
     public static Figura[][] plansza =
     {{ new Wieza(Color.YELLOW_BOLD), null, null, null, new Krol(Color.YELLOW_BOLD), null, null, new Wieza(Color.YELLOW_BOLD) },
         { null, new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), new Hetman(Color.YELLOW_BOLD), null, new Pion(Color.YELLOW_BOLD), new Pion(Color.YELLOW_BOLD), null },
-        { null, null, null, null, null, null, new Pion(Color.BLUE_BOLD), null },
         { null, null, null, null, null, null, null, null },
         { null, null, null, null, null, null, null, null },
-        { null, null, null, null, null, null, new Pion(Color.YELLOW_BOLD), null },
+        { null, null, null, null, null, null, null, null },
+        { null, null, null, null, null, null, null, null },
         { null, new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), new Hetman(Color.BLUE_BOLD), null, new Pion(Color.BLUE_BOLD), new Pion(Color.BLUE_BOLD), null },
         { new Wieza(Color.BLUE_BOLD), null, null, null, new Krol(Color.BLUE_BOLD), null, null, new Wieza(Color.BLUE_BOLD) }};
 */
@@ -29,7 +33,7 @@ public class Szachownica {
    {"   ","   ","   ","   ","   ","   ","   ","   "},
    {Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I ",Color.BLUE_BOLD+" I "},
    {Color.BLUE_BOLD+" W ",Color.BLUE_BOLD+" S ",Color.BLUE_BOLD+" G ",Color.BLUE_BOLD+" H ",Color.BLUE_BOLD+" K ",Color.BLUE_BOLD+" G ",Color.BLUE_BOLD+" S ",Color.BLUE_BOLD+" W "}};
-   */ 
+   */
    public static void Rysuj(){
         int licznik=8, licznikV2=0;
         System.out.println(ConsoleColors.GREEN_BACKGROUND+" /  A  B  C  D  E  F  G  H  \\ "+ConsoleColors.RESET);
@@ -214,4 +218,5 @@ public class Szachownica {
         }
         System.out.println(ConsoleColors.GREEN_BACKGROUND + " \\  A  B  C  D  E  F  G  H  / " + ConsoleColors.RESET);
     }
+    public static int[][] ostatniRuch={{0,0},{0,0}};
 }
