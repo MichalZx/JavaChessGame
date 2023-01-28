@@ -224,7 +224,7 @@ public class Krol extends Figura {
         int[][] zwracanaTablicaRuchow = new int[listaDozwolonyuchRuchow.size()][2];
         zwracanaTablicaRuchow = listaDozwolonyuchRuchow.toArray(zwracanaTablicaRuchow);
         if(zwracanaTablicaRuchow.length != 0){
-            System.out.print(kolorSprawdzany + "Szach na królu!");
+            System.out.print(kolorSprawdzany + "Szach na królu!\n");
         }
         return zwracanaTablicaRuchow;
     }

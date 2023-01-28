@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class ZapisPartii {      // szyblie tworzenie na poczatku kazdej gry
+public class ZapisPartii {   
     private static String pathFile;
     public static void StartGry(){
         File theDir = new File("Zapisane_gry"); // tworzenie foleru ktory zawiera rozgrywki
@@ -25,25 +25,32 @@ public class ZapisPartii {      // szyblie tworzenie na poczatku kazdej gry
         String symbolFigury=figura.split(" ")[1];
         String ruch;
         //System.out.println(figura==" I ");
-        if(byloBicie==true){
-            if(figura==" I " && promocja.equals("0"))               // txt do zapisania w pliku
-                {ruch=kolumnaPiona+":"+nowaPozycja+"\n"; } 
-            else if(figura==" I " && (promocja.equals("0")==false))               // txt do zapisania w pliku
-                {ruch=kolumnaPiona+":"+nowaPozycja+"\n"+nowaPozycja+promocja+"\n"; } 
-            else{ruch=symbolFigury+":"+nowaPozycja+"\n"; }
+        if(byloBicie==true){                                        // bicie
+            if(figura==" I " && promocja.equals("0")){
+                ruch=kolumnaPiona+":"+nowaPozycja+"\n"; 
+            } 
+            else if(figura==" I " && (promocja.equals("0")==false)){
+                ruch=kolumnaPiona+":"+nowaPozycja+"\n"+nowaPozycja+promocja+"\n"; 
+            } 
+            else{
+                ruch=symbolFigury+":"+nowaPozycja+"\n"; 
+            }
         }
         else{
-            if(figura==" I "&&promocja.equals("0"))               // txt do zapisania w pliku
-            {ruch=nowaPozycja+"\n"; } 
-            else if(figura==" I " && (promocja.equals("0")==false))               // txt do zapisania w pliku
-            {ruch=nowaPozycja+promocja+"\n"; } 
-            else{ruch=symbolFigury+nowaPozycja+"\n"; }
+            if(figura==" I "&&promocja.equals("0")){               
+                ruch=nowaPozycja+"\n"; 
+            } 
+            else if(figura==" I " && (promocja.equals("0")==false)){          
+                ruch=nowaPozycja+promocja+"\n"; } 
+            else{
+                ruch=symbolFigury+nowaPozycja+"\n"; 
+            }
         }  
         try (Writer out = new BufferedWriter(new FileWriter(pathFile, true));) {
             out.append(ruch);           // tu dopisuje
             out.close();
         } catch (Exception e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred. bład zapisu do pliku");
             e.printStackTrace();        
         }
     }

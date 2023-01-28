@@ -88,7 +88,7 @@ public class Player {
             ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97),promocja);     // zapis pozunieniac do pliku
             Szachownica.ostatniRuch[0] = pozycjaFiguryWybranej;
             Szachownica.ostatniRuch[1] = pozycjaRuchu;
-
+            
             Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
         }
         else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){
@@ -130,6 +130,25 @@ public class Player {
         }
         return false;
     }
+    /* private void ZmianiaPozycji(int[] pozA, int[] pozB, boolean bity, Color kolorGracza){ // nie wypali bo el passat, roszada;
+        if(kolorGracza==Color.BLUE_BOLD){
+            for (int i=0;i<16;i++) {
+                if(Zakonczenie.BlueKoordynaty[i][0]==pozA[0] && Zakonczenie.BlueKoordynaty[i][1]==pozA[1]){
+                    Zakonczenie.BlueKoordynaty[i]=pozB;
+                    break;
+                }
+            }
+            if (bity) {
+                for (int i=0;i<16;i++) {
+                    if(Zakonczenie.YellowKoordynaty[i][0]==pozB[0] && Zakonczenie.YellowKoordynaty[i][1]==pozB[1]){
+                        Zakonczenie.YellowKoordynaty[i][0]=99;
+                        break;
+                    }
+                }
+            }
+        }
+
+    } */
     public static void KoniecGry(Color wynik){ // niebieski to wygrywa niebieski, zolty to on, byle jaki iny to pat
         if(wynik==Color.BLUE_BOLD){
             System.out.println(Color.RED+"Koniec gry, Wygrywają Niebieskie (Białe)"+Color.RESET);
