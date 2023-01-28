@@ -132,6 +132,7 @@ public class Pion extends Figura {
                     dozwolonyRuch[0] = pozycjaFiguryWybranej[0] - 1;
                     dozwolonyRuch[1] = pozycjaFiguryWybranej[1] + 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                    Szachownica.enPassant[0]=dozwolonyRuch;
                 }
             }
             if(pozycjaFiguryWybranej[0] == 3 && pozycjaFiguryWybranej[1] != 0 && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1] instanceof Pion && Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1] - 1].getKolor() == Color.YELLOW_BOLD && Szachownica.plansza[pozycjaFiguryWybranej[0] - 1][pozycjaFiguryWybranej[1] - 1] == null){
@@ -140,6 +141,7 @@ public class Pion extends Figura {
                     dozwolonyRuch[0] = pozycjaFiguryWybranej[0] - 1;
                     dozwolonyRuch[1] = pozycjaFiguryWybranej[1] - 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
+                    Szachownica.enPassant[1]=dozwolonyRuch;
                 }
             }
         }

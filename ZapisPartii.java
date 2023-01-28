@@ -21,13 +21,19 @@ public class ZapisPartii {
             e.printStackTrace();
         }
     }
-    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona, String promocja){
+    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona, String promocja, boolean enPassant){
         String symbolFigury=figura.split(" ")[1];
         String ruch;
         //System.out.println(figura==" I ");
-        if(byloBicie==true){                                        // bicie
-            if(figura==" I " && promocja.equals("0")){
+        if(byloBicie){                                        // bicie
+            if(figura==" I " && promocja.equals("0") && enPassant){
+                ruch=kolumnaPiona+":"+nowaPozycja+"(e.p.)\n"; 
+            } 
+            else if(figura==" I " && promocja.equals("0")){
                 ruch=kolumnaPiona+":"+nowaPozycja+"\n"; 
+            } 
+            else if(figura==" I " && (promocja.equals("0")==false) && enPassant){
+                ruch=kolumnaPiona+":"+nowaPozycja+"(e.p.)\n"+nowaPozycja+promocja+"\n"; 
             } 
             else if(figura==" I " && (promocja.equals("0")==false)){
                 ruch=kolumnaPiona+":"+nowaPozycja+"\n"+nowaPozycja+promocja+"\n"; 

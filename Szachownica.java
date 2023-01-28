@@ -219,4 +219,5 @@ public class Szachownica {
         System.out.println(ConsoleColors.GREEN_BACKGROUND + " \\  A  B  C  D  E  F  G  H  / " + ConsoleColors.RESET);
     }
     public static int[][] ostatniRuch={{0,0},{0,0}};
+    public static int[][] enPassant={{99,99},{99,99}};
 }

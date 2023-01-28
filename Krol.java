@@ -39,7 +39,7 @@ public class Krol extends Figura {
         for(int i = pozycjaKrola[0] - 1, j = pozycjaKrola[1] + 1; i >= 0 && j <= 7; i--, j++){ //prawy dolny
             int [] dozwolonyRuch = new int[2];
             //goniec hetman
-            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
+            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = j;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -49,7 +49,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[0] + 1, j = pozycjaKrola[1] + 1; i <= 7 && j <= 7; i++, j++){
             int [] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
+            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = j;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -59,7 +59,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[0] - 1, j = pozycjaKrola[1] - 1; i >= 0 && j >= 0; i--, j--){
             int [] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
+            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = j;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -69,7 +69,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[0] + 1, j = pozycjaKrola[1] - 1; i <= 7 && j >= 0; i++, j--){
             int [] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
+            if(Szachownica.plansza[i][j] != null && Szachownica.plansza[i][j].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][j] instanceof Goniec || Szachownica.plansza[i][j] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = j;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -80,7 +80,7 @@ public class Krol extends Figura {
         //wieza hetman
         for(int i = pozycjaKrola[0] - 1; i >= 0; i--){
             int [] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[i][pozycjaKrola[1]] != null && Szachownica.plansza[i][pozycjaKrola[1]].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
+            if(Szachownica.plansza[i][pozycjaKrola[1]] != null && Szachownica.plansza[i][pozycjaKrola[1]].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = pozycjaKrola[1];
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -90,7 +90,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[0] + 1; i < 8; i++){
             int [] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[i][pozycjaKrola[1]] != null && Szachownica.plansza[i][pozycjaKrola[1]].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
+            if(Szachownica.plansza[i][pozycjaKrola[1]] != null && Szachownica.plansza[i][pozycjaKrola[1]].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
                 dozwolonyRuch[0] = i;
                 dozwolonyRuch[1] = pozycjaKrola[1];
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -100,7 +100,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[1] - 1; i >= 0; i--){
             int[] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[pozycjaKrola[0]][i] != null && Szachownica.plansza[pozycjaKrola[0]][i].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
+            if(Szachownica.plansza[pozycjaKrola[0]][i] != null && Szachownica.plansza[pozycjaKrola[0]][i].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
                 dozwolonyRuch[0] = pozycjaKrola[0];
                 dozwolonyRuch[1] = i;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -110,7 +110,7 @@ public class Krol extends Figura {
         }
         for(int i = pozycjaKrola[1] + 1; i < 8; i++){
             int[] dozwolonyRuch = new int[2];
-            if(Szachownica.plansza[pozycjaKrola[0]][i] != null && Szachownica.plansza[pozycjaKrola[0]][i].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
+            if(Szachownica.plansza[pozycjaKrola[0]][i] != null && Szachownica.plansza[pozycjaKrola[0]][i].getKolor() != kolorSprawdzany && ( Szachownica.plansza[i][pozycjaKrola[1]] instanceof Wieza || Szachownica.plansza[i][pozycjaKrola[1]] instanceof Hetman )){
                 dozwolonyRuch[0] = pozycjaKrola[0];
                 dozwolonyRuch[1] = i;
                 listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -122,7 +122,7 @@ public class Krol extends Figura {
         if ( pozycjaKrola[0] + 2 <= 7 ){
             if ( pozycjaKrola[1] + 1 <= 7 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] + 1] != null && Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] + 1].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] + 1] != null && Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] + 1].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] + 2;
                     dozwolonyRuch[1] = pozycjaKrola[1] + 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -130,7 +130,7 @@ public class Krol extends Figura {
             }
             if ( pozycjaKrola[1] - 1 >= 0 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] - 1] != null && Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] - 1].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] - 1] != null && Szachownica.plansza[pozycjaKrola[0] + 2][pozycjaKrola[1] - 1].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] + 2;
                     dozwolonyRuch[1] = pozycjaKrola[1] - 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -140,7 +140,7 @@ public class Krol extends Figura {
         if ( pozycjaKrola[0] - 2 >= 0 ){
             if ( pozycjaKrola[1] + 1 <= 7 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] + 1] != null && Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] + 1].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] + 1] != null && Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] + 1].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] - 2;
                     dozwolonyRuch[1] = pozycjaKrola[1] + 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -148,7 +148,7 @@ public class Krol extends Figura {
             }
             if ( pozycjaKrola[1] - 1 >= 0 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] - 1] != null && Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] - 1].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] - 1] != null && Szachownica.plansza[pozycjaKrola[0] - 2][pozycjaKrola[1] - 1].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] - 2;
                     dozwolonyRuch[1] = pozycjaKrola[1] - 1;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -158,7 +158,7 @@ public class Krol extends Figura {
         if ( pozycjaKrola[1] + 2 <= 7 ){
             if ( pozycjaKrola[0] + 1 <= 7 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] + 2] != null && Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] + 2].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] + 2] != null && Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] + 2].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] + 1;
                     dozwolonyRuch[1] = pozycjaKrola[1] + 2;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -166,7 +166,7 @@ public class Krol extends Figura {
             }
             if ( pozycjaKrola[0] - 1 >= 0 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] + 2] != null && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] + 2].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] + 2] != null && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] + 2].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] - 1;
                     dozwolonyRuch[1] = pozycjaKrola[1] + 2;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -176,7 +176,7 @@ public class Krol extends Figura {
         if ( pozycjaKrola[1] - 2 >= 0 ){
             if ( pozycjaKrola[0] + 1 <= 7 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] - 2] != null && Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] - 2].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] - 2] != null && Szachownica.plansza[pozycjaKrola[0] + 1][pozycjaKrola[1] - 2].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] + 1;
                     dozwolonyRuch[1] = pozycjaKrola[1] - 2;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -184,7 +184,7 @@ public class Krol extends Figura {
             }
             if ( pozycjaKrola[0] - 1 >= 0 ){
                 int[] dozwolonyRuch = new int[2];
-                if(Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] != null && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2].getKolor() != Szachownica.plansza[pozycjaKrola[0]][pozycjaKrola[1]].getKolor() && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
+                if(Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] != null && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2].getKolor() != kolorSprawdzany && Szachownica.plansza[pozycjaKrola[0] - 1][pozycjaKrola[1] - 2] instanceof Skoczek){
                     dozwolonyRuch[0] = pozycjaKrola[0] - 1;
                     dozwolonyRuch[1] = pozycjaKrola[1] - 2;
                     listaDozwolonyuchRuchow.add(dozwolonyRuch);
@@ -226,6 +226,7 @@ public class Krol extends Figura {
         if(zwracanaTablicaRuchow.length != 0){
             System.out.print(kolorSprawdzany + "Szach na królu!\n");
         }
+        //System.out.print(kolorSprawdzany + "krol zostal sprawdzony!\n");
         return zwracanaTablicaRuchow;
     }
 

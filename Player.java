@@ -1,10 +1,9 @@
 import java.util.Scanner;
-
 public class Player {
     Scanner sc = new Scanner(System.in);
     private int[] pozycjaKrolaNiebieskich = new int[2];
     private int[] pozycjaKrolaZoltych = new int[2];
-
+    Figura zbitaFigura;
     public Player(){
         pozycjaKrolaNiebieskich[0] = 7;
         pozycjaKrolaNiebieskich[1] = 4;
@@ -54,38 +53,66 @@ public class Player {
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
             Ruch(kolorGracza, kolorPrzeciwnika);
         }
+        boolean enPassant=false;
         String promocja="0";
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
         if(CzyNalezyDoSzachownicy(charPoleWybranej) & CzyMozliwyRuch(pozycjaRuchu, mozliweRuchy)){
-            
+            boolean bicie= CzyNastapiloBicie(pozycjaRuchu, kolorPrzeciwnika);
+            int[] polePotencjalnieZbitej=pozycjaRuchu.clone();
+            if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol){ //aktualizuje pozycje króla jeżeli się poruszy
+                if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].getKolor() == Color.BLUE_BOLD) pozycjaKrolaNiebieskich = pozycjaRuchu;
+                else pozycjaKrolaZoltych = pozycjaRuchu;
+            }
+            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
+            System.out.println(polePotencjalnieZbitej[0]+" "+polePotencjalnieZbitej[1]);
+            for (int i = 0; i < 2; i++) {
+                if(pozycjaRuchu[0]==Szachownica.enPassant[i][0] && pozycjaRuchu[1]==Szachownica.enPassant[i][1]){       // czy byl en passant
+                    bicie=true;
+                    enPassant=true;
+                    if(kolorGracza==Color.BLUE_BOLD) polePotencjalnieZbitej[0]-=1;
+                    else polePotencjalnieZbitej[0]+=1;
+                }
+            }
+            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
+            System.out.println(polePotencjalnieZbitej[0]+" "+polePotencjalnieZbitej[1]);
+
+            if(bicie){
+                zbitaFigura = Szachownica.plansza[polePotencjalnieZbitej[0]][polePotencjalnieZbitej[1]];  // zapisuje typ zbitej figury
+            }
+            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
+
+            Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy); //wykonanie ruchu
             if(kolorGracza == Color.YELLOW_BOLD){
-                if(Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorGracza).length != 0) // sprawdza szacha dla obu króli (zwraca bool)
+                if(Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorGracza).length != 0){ // sprawdza szacha dla obu króli (zwraca bool)
+                    int[][] ctrlZ={{pozycjaFiguryWybranej[0],pozycjaFiguryWybranej[1]}};
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].Ruch(pozycjaFiguryWybranej,pozycjaRuchu , ctrlZ); //Cofniecie ruchu
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura;
                     Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
+                }
                 else{
-                    Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy); //wykonanie ruchu
                     if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury==" I "){
-                        promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu);
+                        promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu); // czy byla promocja
                     }
                     Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorPrzeciwnika);
                 }
             }
             else{
-                if(Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorGracza).length != 0)
+                if(Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorGracza).length != 0){
+                    int[][] ctrlZ={{pozycjaFiguryWybranej[0],pozycjaFiguryWybranej[1]}};
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].Ruch(pozycjaFiguryWybranej,pozycjaRuchu , ctrlZ); //Cofniecie ruchu  
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura;  
                     Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
+                }
                 else {
-                    Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy); //wykonanie ruchu
                     if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury==" I "){
-                        promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu);
+                        promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu);     // czy byla promocja
                     }
                     Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorPrzeciwnika); // sprawdza szacha dla obu króli (zwraca bool)
                 }
             }
-            if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] instanceof Krol){ //aktualizuje pozycje króla jeżeli się poruszy
-                if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].getKolor() == Color.BLUE_BOLD) pozycjaKrolaNiebieskich = pozycjaRuchu;
-                else pozycjaKrolaZoltych = pozycjaRuchu;
-            }
             
-            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(),CzyNastapiloBicie(pozycjaRuchu,kolorPrzeciwnika),Character.toString(pozycjaFiguryWybranej[1]+97),promocja);     // zapis pozunieniac do pliku
+            
+            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(), bicie, Character.toString(pozycjaFiguryWybranej[1]+97),promocja, enPassant);     // zapis pozunieniac do pliku
             Szachownica.ostatniRuch[0] = pozycjaFiguryWybranej;
             Szachownica.ostatniRuch[1] = pozycjaRuchu;
             
