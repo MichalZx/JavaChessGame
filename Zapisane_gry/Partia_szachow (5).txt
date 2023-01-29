@@ -1,0 +1,10 @@
+c4
+c5
+Ha4
+d5
+Hb5
+Gd7
+H:c5
+d:c4
+d4
+Sa6

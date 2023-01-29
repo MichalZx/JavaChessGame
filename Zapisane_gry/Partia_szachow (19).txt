@@ -1,0 +1,13 @@
+Sc3
+Sa6
+Sd5
+Sb8
+Sf6
+S:f6
+e4
+Sa6
+e5
+Sb8
+e6
+Sa6
+e:f7
