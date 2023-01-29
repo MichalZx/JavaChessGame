@@ -6,14 +6,25 @@ public class Wieza extends Figura {
         znakFigury = " W ";
     }
 
-    private boolean czyWykonanoRuch;
-    
-    public void Roszada(){
-
+    private boolean czyWykonanoRuch = false;
+    public boolean getCzyWykonanoRuch(){
+        return czyWykonanoRuch;
     }
 
     @Override
-    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej, int[][] ostatniRuch, int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
+    public void Ruch(int[] pozycjaRuchu, int[] pozycjaFiguryWybranej, int[][] dozwoloneRuchy) { // figura idzie na pole "ruchu", poprzednie pole figury jest puste
+        for (int[] pozycjaDozwolona : dozwoloneRuchy ){
+            if ( pozycjaDozwolona[0] == pozycjaRuchu[0] && pozycjaDozwolona[1] == pozycjaRuchu[1] ) {
+                Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
+                Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
+                czyWykonanoRuch = true;
+                break;
+            }
+        }
+    }
+
+    @Override
+    public int[][] sprawdzMozliweRuchy(int[] pozycjaFiguryWybranej,int[] pozycjaKrola, int[] pozycjaKrolaPrzeciwnika) {
         List<int[]> listaDozwolonyuchRuchow = new ArrayList<>();
         for(int i = pozycjaFiguryWybranej[0] - 1; i >= 0; i--){ //tylko gora
             int [] dozwolonyRuch = new int[2];
@@ -78,5 +89,10 @@ public class Wieza extends Figura {
         int[][] zwracanaTablicaRuchow = new int[listaDozwolonyuchRuchow.size()][2];
         zwracanaTablicaRuchow = listaDozwolonyuchRuchow.toArray(zwracanaTablicaRuchow);
         return zwracanaTablicaRuchow;
+    }
+
+    @Override
+    public String CheckEnd(int[] pozycjaFigury) {
+        return null;
     }
 }
