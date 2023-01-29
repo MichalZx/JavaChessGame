@@ -1,8 +1,8 @@
-/**
- * main
- */
-public class main {
+public class Main {
     public static void main(String[] args) {
-        szachwonica plansza = new szachwonica();
-        plansza.Rysuj();
+        Player gracz = new Player();
+        ZapisPartii.StartGry(); // tworzenie pliku i folderu jesli nie istnieje
+        System.out.println("Zaczynają niebieskie!");
+        gracz.Ruch(Color.BLUE_BOLD,Color.YELLOW_BOLD);//gracz , przeciwnik
     }
+}
