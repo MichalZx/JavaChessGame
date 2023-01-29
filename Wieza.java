@@ -6,10 +6,24 @@ public class Wieza extends Figura {
         znakFigury = " W ";
     }
 
-    private boolean czyWykonanoRuch;
-    
-    public void Roszada(){
+    private boolean czyWykonanoRuch = false;
+    public boolean getCzyWykonanoRuch(){
+        return czyWykonanoRuch;
+    }
+    public void setCzyWykonanoRuch(boolean czyWykonanoRuch){
+        this.czyWykonanoRuch = czyWykonanoRuch;
+    }
 
+    @Override
+    public void Ruch(int[] pozycjaRuchu, int[] pozycjaFiguryWybranej, int[][] dozwoloneRuchy) { // figura idzie na pole "ruchu", poprzednie pole figury jest puste
+        for (int[] pozycjaDozwolona : dozwoloneRuchy ){
+            if ( pozycjaDozwolona[0] == pozycjaRuchu[0] && pozycjaDozwolona[1] == pozycjaRuchu[1] ) {
+                Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
+                Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
+                czyWykonanoRuch = true;
+                break;
+            }
+        }
     }
 
     @Override

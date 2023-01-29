@@ -9,16 +9,32 @@ public class Pion extends Figura {
     }
     Scanner sc = new Scanner(System.in);
     private boolean czyWykonanoRuch = false;
+    public boolean getCzyWykonanoRuch(){
+        return czyWykonanoRuch;
+    }
+    public void setCzyWykonanoRuch(boolean czyWykonanoRuch){
+        this.czyWykonanoRuch = czyWykonanoRuch;
+    }
 
     @Override
     public void Ruch(int[] pozycjaRuchu, int[] pozycjaFiguryWybranej, int[][] dozwoloneRuchy) {
         for (int[] pozycjaDozwolona : dozwoloneRuchy ){
             if ( pozycjaDozwolona[0] == pozycjaRuchu[0] && pozycjaDozwolona[1] == pozycjaRuchu[1] ) {
-                Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
-                Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
-                if(pozycjaFiguryWybranej[1] != pozycjaRuchu[1]){
-                    if(getKolor() == Color.YELLOW_BOLD) { Szachownica.plansza[pozycjaRuchu[0] - 1][pozycjaRuchu[1]] = null; }
-                    else if(getKolor() == Color.BLUE_BOLD) { Szachownica.plansza[pozycjaRuchu[0] + 1][pozycjaRuchu[1]] = null; }
+                if(pozycjaRuchu[1] != pozycjaFiguryWybranej[1] && Szachownica.plansza[pozycjaDozwolona[0]][pozycjaDozwolona[1]] == null){
+                    if(getKolor() == Color.YELLOW_BOLD){
+                        Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
+                        Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
+                        Szachownica.plansza[pozycjaRuchu[0] - 1][pozycjaRuchu[1]] = null;
+                    }
+                    else{
+                        Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
+                        Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
+                        Szachownica.plansza[pozycjaRuchu[0] + 1][pozycjaRuchu[1]] = null;
+                    }
+                }
+                else{
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]] = Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]];
+                    Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] = null;
                 }
                 czyWykonanoRuch = true;
                 break;

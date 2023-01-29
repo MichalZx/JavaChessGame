@@ -63,8 +63,14 @@ public class Player {
                 if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].getKolor() == Color.BLUE_BOLD) pozycjaKrolaNiebieskich = pozycjaRuchu;
                 else pozycjaKrolaZoltych = pozycjaRuchu;
             }
-            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
-            System.out.println(polePotencjalnieZbitej[0]+" "+polePotencjalnieZbitej[1]);
+            boolean czyZrobionoRuch = true;
+            if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Pion)
+                czyZrobionoRuch = ((Pion)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
+            else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Wieza)
+                czyZrobionoRuch = ((Wieza)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
+            else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol)
+                czyZrobionoRuch = ((Krol)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
+
             for (int i = 0; i < 2; i++) {
                 if(pozycjaRuchu[0]==Szachownica.enPassant[i][0] && pozycjaRuchu[1]==Szachownica.enPassant[i][1]){       // czy byl en passant
                     bicie=true;
@@ -73,41 +79,62 @@ public class Player {
                     else polePotencjalnieZbitej[0]+=1;
                 }
             }
-            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
-            System.out.println(polePotencjalnieZbitej[0]+" "+polePotencjalnieZbitej[1]);
-
             if(bicie){
                 zbitaFigura = Szachownica.plansza[polePotencjalnieZbitej[0]][polePotencjalnieZbitej[1]];  // zapisuje typ zbitej figury
             }
-            System.out.println(pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
-
             Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].Ruch(pozycjaRuchu, pozycjaFiguryWybranej, mozliweRuchy); //wykonanie ruchu
             if(kolorGracza == Color.YELLOW_BOLD){
                 if(Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorGracza).length != 0){ // sprawdza szacha dla obu króli (zwraca bool)
                     int[][] ctrlZ={{pozycjaFiguryWybranej[0],pozycjaFiguryWybranej[1]}};
                     Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].Ruch(pozycjaFiguryWybranej,pozycjaRuchu , ctrlZ); //Cofniecie ruchu
-                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura;
+                    if(bicie){
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura;}
+                    System.out.println("ctrl z");
+                    zbitaFigura=null; 
+                    if(czyZrobionoRuch == false){
+                        if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Pion)
+                            ((Pion)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                        else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Wieza)
+                            ((Wieza)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                        else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol)
+                            ((Krol)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                    }
                     Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
                 }
                 else{
                     if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury==" I "){
                         promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu); // czy byla promocja
                     }
-                    Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorPrzeciwnika);
+                    if(Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorPrzeciwnika).length !=0){
+                        if(Zakonczenie.Mat(kolorPrzeciwnika,pozycjaKrolaNiebieskich ,pozycjaKrolaZoltych )==false) System.out.println("Szach, ale nie mat\n");
+                    }
                 }
             }
             else{
                 if(Szachownica.plansza[pozycjaKrolaNiebieskich[0]][pozycjaKrolaNiebieskich[1]].czySzach(pozycjaKrolaNiebieskich, kolorGracza).length != 0){
                     int[][] ctrlZ={{pozycjaFiguryWybranej[0],pozycjaFiguryWybranej[1]}};
                     Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].Ruch(pozycjaFiguryWybranej,pozycjaRuchu , ctrlZ); //Cofniecie ruchu  
-                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura;  
+                    if(bicie){
+                    Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]=zbitaFigura; }
+                    zbitaFigura=null; 
+                    System.out.println("ctrl z");
+                    if(czyZrobionoRuch == false){
+                        if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Pion)
+                            ((Pion)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                        else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Wieza)
+                            ((Wieza)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                        else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol)
+                            ((Krol)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).setCzyWykonanoRuch(false);
+                    }
                     Ruch2(pozycjaFiguryWybranej, mozliweRuchy,kolorGracza,kolorPrzeciwnika);
                 }
                 else {
                     if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury==" I "){
                         promocja= Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].CheckEnd(pozycjaRuchu);     // czy byla promocja
                     }
-                    Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorPrzeciwnika); // sprawdza szacha dla obu króli (zwraca bool)
+                    if(Szachownica.plansza[pozycjaKrolaZoltych[0]][pozycjaKrolaZoltych[1]].czySzach(pozycjaKrolaZoltych, kolorPrzeciwnika).length !=0){
+                        if(Zakonczenie.Mat(kolorPrzeciwnika,pozycjaKrolaZoltych ,pozycjaKrolaNiebieskich )==false) System.out.println("Szach, ale nie mat\n");
+                    } // sprawdza szacha dla obu króli (zwraca bool)
                 }
             }
             
@@ -115,7 +142,10 @@ public class Player {
             ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(), bicie, Character.toString(pozycjaFiguryWybranej[1]+97),promocja, enPassant);     // zapis pozunieniac do pliku
             Szachownica.ostatniRuch[0] = pozycjaFiguryWybranej;
             Szachownica.ostatniRuch[1] = pozycjaRuchu;
-            
+            int[] tab={99,99};
+            Szachownica.enPassant[0]=tab;   //reset enpasanta
+            Szachownica.enPassant[1]=tab;
+            Zakonczenie.Pat(kolorPrzeciwnika);  //sprawdzanie PAta
             Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
         }
         else if(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]]==null){
