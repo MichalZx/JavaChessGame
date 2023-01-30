@@ -365,17 +365,21 @@ public class Krol extends Figura {
             if(getKolor() == Color.BLUE_BOLD && czySzach(pozycjaFiguryWybranej, Color.BLUE_BOLD).length == 0){
                 if(Szachownica.plansza[7][0] != null && Szachownica.plansza[7][0] instanceof Wieza && !((Wieza) Szachownica.plansza[7][0]).getCzyWykonanoRuch() && Szachownica.plansza[7][1] == null && Szachownica.plansza[7][2] == null && Szachownica.plansza[7][3] == null && czySzach(new int[]{7, 3}, Color.BLUE_BOLD).length == 0 && czySzach(new int[]{7, 2}, Color.BLUE_BOLD).length == 0){
                     listaDozwolonyuchRuchow.add(new int[]{7,2});
+                    Szachownica.roszada[0]=new int[]{7,2};
                 }
                 if(Szachownica.plansza[7][7] != null && Szachownica.plansza[7][7] instanceof Wieza && !((Wieza) Szachownica.plansza[7][7]).getCzyWykonanoRuch() && Szachownica.plansza[7][6] == null && Szachownica.plansza[7][5] == null && czySzach(new int[]{7, 5}, Color.BLUE_BOLD).length == 0 && czySzach(new int[]{7, 6}, Color.BLUE_BOLD).length == 0){
                     listaDozwolonyuchRuchow.add(new int[]{7,6});
+                    Szachownica.roszada[1]=new int[]{7,6};
                 }
             }
             else if(getKolor() == Color.YELLOW_BOLD && czySzach(pozycjaFiguryWybranej, Color.YELLOW_BOLD). length == 0){
                 if(Szachownica.plansza[0][0] != null && Szachownica.plansza[0][0] instanceof Wieza && !((Wieza) Szachownica.plansza[0][0]).getCzyWykonanoRuch() && Szachownica.plansza[0][1] == null && Szachownica.plansza[0][2] == null && Szachownica.plansza[0][3] == null && czySzach(new int[]{0, 3}, Color.YELLOW_BOLD).length == 0 && czySzach(new int[]{0, 2}, Color.YELLOW_BOLD).length == 0){
                     listaDozwolonyuchRuchow.add(new int[]{0,2});
+                    Szachownica.roszada[0]=new int[]{0,2};
                 }
                 if(Szachownica.plansza[0][7] != null && Szachownica.plansza[0][7] instanceof Wieza && !((Wieza) Szachownica.plansza[0][7]).getCzyWykonanoRuch() && Szachownica.plansza[0][6] == null && Szachownica.plansza[0][5] == null && czySzach(new int[]{0, 5}, Color.YELLOW_BOLD).length == 0 && czySzach(new int[]{0, 6}, Color.YELLOW_BOLD).length == 0){
                     listaDozwolonyuchRuchow.add(new int[]{0,6});
+                    Szachownica.roszada[1]=new int[]{0,6};
                 }
             }
         }

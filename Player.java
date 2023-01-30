@@ -53,6 +53,7 @@ public class Player {
             System.out.println(Color.RED+"Nieprawidłowa wartość!"+Color.RESET);
             Ruch(kolorGracza, kolorPrzeciwnika);
         }
+        int roszada=0;
         boolean enPassant=false;
         String promocja="0";
         int[] pozycjaRuchu = {(charPoleWybranej[1]-56)*-1, charPoleWybranej[0]-97};
@@ -62,14 +63,23 @@ public class Player {
             if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol){ //aktualizuje pozycje króla jeżeli się poruszy
                 if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]].getKolor() == Color.BLUE_BOLD) pozycjaKrolaNiebieskich = pozycjaRuchu;
                 else pozycjaKrolaZoltych = pozycjaRuchu;
+                //System.out.println("Sprawdza roszade i "+roszada+" pole roszady: "+Szachownica.roszada[0][0]+" "+Szachownica.roszada[0][1]+" "+Szachownica.roszada[1][0]+" "+Szachownica.roszada[1][1]);
+                //System.out.println("Sprawdza roszade i "+roszada+" pole ruchu: "+pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
+                if(Szachownica.roszada[0][0]==pozycjaRuchu[0]&&Szachownica.roszada[0][1]==pozycjaRuchu[1])roszada=1;  //sprawdza roszade
+                else if(Szachownica.roszada[1][0]==pozycjaRuchu[0] && Szachownica.roszada[1][1]==pozycjaRuchu[1])roszada=2;
             }
+            System.out.println("koniec sprawdzania roszade i "+roszada);
+            //System.out.println("koniec sprawdzania roszade i "+roszada+" pole ruchu: "+pozycjaRuchu[0]+" "+pozycjaRuchu[1]);
+
+
             boolean czyZrobionoRuch = true;
             if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Pion)
                 czyZrobionoRuch = ((Pion)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
             else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Wieza)
                 czyZrobionoRuch = ((Wieza)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
-            else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol)
+            else if(Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]] instanceof Krol){
                 czyZrobionoRuch = ((Krol)Szachownica.plansza[pozycjaFiguryWybranej[0]][pozycjaFiguryWybranej[1]]).getCzyWykonanoRuch();
+            }
 
             for (int i = 0; i < 2; i++) {
                 if(pozycjaRuchu[0]==Szachownica.enPassant[i][0] && pozycjaRuchu[1]==Szachownica.enPassant[i][1]){       // czy byl en passant
@@ -139,12 +149,13 @@ public class Player {
             }
             
             
-            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(), bicie, Character.toString(pozycjaFiguryWybranej[1]+97),promocja, enPassant);     // zapis pozunieniac do pliku
+            ZapisPartii.ZapisRuchu(Szachownica.plansza[pozycjaRuchu[0]][pozycjaRuchu[1]].znakFigury,pozycjaIn.toLowerCase(), bicie, Character.toString(pozycjaFiguryWybranej[1]+97),promocja, enPassant, roszada);     // zapis pozunieniac do pliku
             Szachownica.ostatniRuch[0] = pozycjaFiguryWybranej;
             Szachownica.ostatniRuch[1] = pozycjaRuchu;
             int[] tab={99,99};
             Szachownica.enPassant[0]=tab;   //reset enpasanta
             Szachownica.enPassant[1]=tab;
+            Szachownica.roszada[1]=new int[]{99,99}; Szachownica.roszada[0]=new int[]{99,99};
             Zakonczenie.Pat(kolorPrzeciwnika);  //sprawdzanie PAta
             Ruch(kolorPrzeciwnika,kolorGracza);     //zamiana kolejek - udany ruch
         }

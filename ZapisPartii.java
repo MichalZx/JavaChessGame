@@ -21,7 +21,7 @@ public class ZapisPartii {
             e.printStackTrace();
         }
     }
-    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona, String promocja, boolean enPassant){
+    public static void ZapisRuchu( String figura, String nowaPozycja, boolean byloBicie, String kolumnaPiona, String promocja, boolean enPassant, int roszada){
         String symbolFigury=figura.split(" ")[1];
         String ruch;
         //System.out.println(figura==" I ");
@@ -48,6 +48,10 @@ public class ZapisPartii {
             } 
             else if(figura==" I " && (promocja.equals("0")==false)){          
                 ruch=nowaPozycja+promocja+"\n"; } 
+            else if(roszada==1){
+                ruch="O-O-O\n";} //dluga roszada
+            else if(roszada==2){
+                ruch="O-O\n";} //krotka roszada
             else{
                 ruch=symbolFigury+nowaPozycja+"\n"; 
             }

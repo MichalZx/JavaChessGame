@@ -220,4 +220,5 @@ public class Szachownica {
     }
     public static int[][] ostatniRuch={{0,0},{0,0}};
     public static int[][] enPassant={{99,99},{99,99}};
+    public static int[][] roszada={{99,99},{99,99}};
 }
